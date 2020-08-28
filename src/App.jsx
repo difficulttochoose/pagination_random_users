@@ -1,10 +1,10 @@
 import React from "react";
-import UsersLoader from "./components/UsersLoader";
+import UsersCardsPagination from "./components/UsersCardsPagination";
 
 const App = () => {
   return (
     <>
-      <UsersLoader />
+      <UsersCardsPagination />
     </>
   );
 };

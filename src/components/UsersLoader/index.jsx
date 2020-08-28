@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { getUsers } from "./../../api";
-import Pagination from "../Pagination";
+import UserCard from "../UserCard";
+import styles from "./UsersLoader.module.scss";
 
 class UsersLoader extends Component {
   constructor(props) {
@@ -10,12 +11,11 @@ class UsersLoader extends Component {
       isFetching: true,
       users: [],
       error: null,
-      currentPage: 1,
     };
   }
 
   loadUsers = () => {
-    const { currentPage } = this.state;
+    const { currentPage } = this.props;
     getUsers({
       page: currentPage,
     })
@@ -38,36 +38,14 @@ class UsersLoader extends Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.currentPage !== this.state.currentPage) {
+    const { currentPage } = this.props;
+    if (prevProps.currentPage !== currentPage) {
       this.loadUsers();
     }
   }
 
-  prev = () => {
-    const { currentPage } = this.state;
-    if (currentPage > 1) {
-      this.setState({
-        currentPage: currentPage - 1,
-      });
-    }
-  };
-
-  next = () => {
-    const { currentPage } = this.state;
-    this.setState({
-      currentPage: currentPage + 1,
-    });
-  };
-
-  setPage = (page) => {
-    this.setState({
-      currentPage: page,
-    });
-  };
-
   render() {
-    const { users, error, isFetching, currentPage } = this.state;
-
+    const { users, error, isFetching } = this.state;
     if (error) {
       return <div>Error</div>;
     }
@@ -77,45 +55,11 @@ class UsersLoader extends Component {
     }
 
     return (
-      <>
-        <h1>{currentPage}</h1>
-        <Pagination
-          numberOfPages={8}
-          currentPage={currentPage}
-          next={this.next}
-          prev={this.prev}
-          setPage={this.setPage}
-        />
-        <ul>
-          <li>
-            <h2>USERS LIST:</h2>
-          </li>
-          {users.map((u) => (
-            <li
-              key={`${u.email}`}
-              style={{
-                background: "yellow",
-                border: "2px solid orange",
-                maxWidth: "350px",
-                height: "300px",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <br />
-              <div>
-                <img src={u.picture.large} alt="" />
-              </div>
-              <p>
-                {u.name.title} {u.name.first} {u.name.last}
-              </p>
-              <a href={u.email}>{u.email}</a>
-              <br />
-            </li>
-          ))}
-        </ul>
-      </>
+      <ul className={styles.usersList}>
+        {users.map((u) => (
+          <UserCard user={u} />
+        ))}
+      </ul>
     );
   }
 }

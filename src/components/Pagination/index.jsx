@@ -1,5 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styles from "./Pagination.module.scss";
+import classNames from "classnames";
+import Icon from "@mdi/react";
+import { mdiDotsHorizontal, mdiChevronRight, mdiChevronLeft } from "@mdi/js";
 
 function Pagination(props) {
   const { numberOfPages, currentPage, next, prev, setPage } = props;
@@ -7,42 +11,63 @@ function Pagination(props) {
   const leftBorderPageButton = 1 + (currentPage - currentPosition);
   const rightBorderPageButton = numberOfPages + (currentPage - currentPosition);
 
-  const createList = (firstIndex, lastIndex) => {
+  const createList = (firstIndex, lastIndex, currentPage) => {
     let list = [];
     for (let page = firstIndex; page <= lastIndex; ++page) {
       list.push(
-        <li style={{ display: "inline" }}>
-          <button onClick={() => setPage(page)}>{page}</button>
+        <li className={styles.listItem}>
+          <button
+            className={classNames(styles.listItemButton, {
+              [styles.currentPage]: page === currentPage,
+            })}
+            onClick={() => setPage(page)}
+          >
+            {page}
+          </button>
         </li>
       );
     }
-    return <ul>{list}</ul>;
+    return <ul className={styles.listStyle}>{list}</ul>;
   };
 
   let pagesList = null;
   if (currentPage >= 1 && currentPage < numberOfPages) {
-    pagesList = createList(1, numberOfPages);
+    pagesList = createList(1, numberOfPages, currentPage);
   } else {
     pagesList = (
       <>
         {leftBorderPageButton > 2 && (
           <>
-            <button onClick={() => setPage(1)}>1</button>
-            <span>...</span>
+            <button
+              className={styles.listItemButton}
+              onClick={() => setPage(1)}
+            >
+              1
+            </button>
+            <Icon path={mdiDotsHorizontal} className={styles.ellipsisStyle} />
           </>
         )}
-        {createList(leftBorderPageButton, rightBorderPageButton)}
+        {createList(leftBorderPageButton, rightBorderPageButton, currentPage)}
       </>
     );
   }
   return (
-    <div
-      style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
-    >
-      {currentPage > 1 && <button onClick={prev}>prev</button>}
+    <div className={styles.wrapper}>
+      <button
+        className={classNames(styles.listItemButton, styles.nextPrevButton)}
+        disabled={currentPage > 1 ? false : true}
+        onClick={prev}
+      >
+        <Icon path={mdiChevronLeft} />
+      </button>
       {pagesList}
-      <span>...</span>
-      <button onClick={next}>next</button>
+      <Icon path={mdiDotsHorizontal} className={styles.ellipsisStyle} />
+      <button
+        className={classNames(styles.listItemButton, styles.nextPrevButton)}
+        onClick={next}
+      >
+        <Icon path={mdiChevronRight} />
+      </button>
     </div>
   );
 }

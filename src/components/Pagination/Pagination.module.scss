@@ -1,0 +1,70 @@
+$size: 40px;
+$currentPrimaryColor: rgb(20, 168, 0);
+$currentSecondaryColor: rgb(188, 243, 166);
+$currentActiveColor: rgb(138, 247, 138);
+$buttonPrimaryColor: rgb(151, 151, 151);
+$buttonSecondaryColor: rgb(211, 211, 211);
+$buttonActiveColor: rgb(209, 209, 209);
+
+.listItem {
+  display: inline;
+}
+.listItemButton {
+  height: $size;
+  min-width: $size;
+  max-width: 50px;
+  border: 2px solid transparent;
+  font-size: 17px;
+  color: $buttonPrimaryColor;
+  cursor: pointer;
+}
+.listItemButton:focus,
+.listItemButton:active {
+  outline: none !important;
+}
+.listItemButton:active {
+  background-color: $buttonActiveColor;
+}
+.listItemButton:hover {
+  border-color: $buttonSecondaryColor;
+}
+.listItemButton:disabled {
+  color: $buttonSecondaryColor;
+  background-color: rgba(239, 239, 239, 0.3) !important;
+  cursor: unset;
+}
+.listItemButton:disabled:hover {
+  border-color: transparent;
+  cursor: unset;
+}
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.currentPage {
+  color: $currentPrimaryColor;
+  background: $currentSecondaryColor;
+}
+.currentPage:hover {
+  border-color: $currentPrimaryColor;
+}
+.currentPage:active {
+  background-color: $currentActiveColor;
+}
+.ellipsisStyle {
+  width: 50px;
+  height: 25px;
+  color: rgb(61, 61, 61);
+}
+.listStyle {
+  padding: 0;
+}
+.nextPrevButton {
+  position: relative;
+  & > * {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+  }
+}
