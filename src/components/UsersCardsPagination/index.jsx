@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import UsersLoader from "../UsersLoader";
 import Pagination from "../Pagination";
 
@@ -41,21 +40,18 @@ class UsersCardsPagination extends Component {
     const { currentPage } = this.state;
     return (
       <>
-        <h1>{currentPage}</h1>
+        <h1 style={{ textAlign: "center" }}>USERS LIST:</h1>
+        <UsersLoader currentPage={currentPage} />
         <Pagination
-          numberOfPages={5}
+          numberOfPages={7}
           currentPage={currentPage}
           next={this.next}
           prev={this.prev}
           setPage={this.setPage}
         />
-        <UsersLoader currentPage={currentPage} />
       </>
     );
   }
 }
 
-// UsersCardsPagination.propTypes = {
-//         prop: PropTypes
-//     }
 export default UsersCardsPagination;

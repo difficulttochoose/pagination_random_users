@@ -9,6 +9,10 @@ body {
 * {
   box-sizing: border-box;
 }
+h1 {
+  font-size: 3em;
+  margin: 0.5em;
+}
 ul {
   padding: 0;
 }

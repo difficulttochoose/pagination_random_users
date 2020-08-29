@@ -1,3 +1,5 @@
+@import "../../common";
+
 $size: 40px;
 $currentPrimaryColor: rgb(20, 168, 0);
 $currentSecondaryColor: rgb(188, 243, 166);
@@ -17,6 +19,7 @@ $buttonActiveColor: rgb(209, 209, 209);
   font-size: 17px;
   color: $buttonPrimaryColor;
   cursor: pointer;
+  background-color: #efefefb8;
 }
 .listItemButton:focus,
 .listItemButton:active {
@@ -38,9 +41,9 @@ $buttonActiveColor: rgb(209, 209, 209);
   cursor: unset;
 }
 .wrapper {
-  display: flex;
-  align-items: center;
   justify-content: center;
+  padding: 2em;
+  @extend %flexContainer;
 }
 .currentPage {
   color: $currentPrimaryColor;
@@ -56,9 +59,6 @@ $buttonActiveColor: rgb(209, 209, 209);
   width: 50px;
   height: 25px;
   color: rgb(61, 61, 61);
-}
-.listStyle {
-  padding: 0;
 }
 .nextPrevButton {
   position: relative;

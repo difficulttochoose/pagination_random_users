@@ -7,6 +7,7 @@ import { mdiDotsHorizontal, mdiChevronRight, mdiChevronLeft } from "@mdi/js";
 
 function Pagination(props) {
   const { numberOfPages, currentPage, next, prev, setPage } = props;
+
   const currentPosition = Math.ceil(numberOfPages / 2);
   const leftBorderPageButton = 1 + (currentPage - currentPosition);
   const rightBorderPageButton = numberOfPages + (currentPage - currentPosition);
@@ -15,7 +16,7 @@ function Pagination(props) {
     let list = [];
     for (let page = firstIndex; page <= lastIndex; ++page) {
       list.push(
-        <li className={styles.listItem}>
+        <li key={page} className={styles.listItem}>
           <button
             className={classNames(styles.listItemButton, {
               [styles.currentPage]: page === currentPage,
@@ -27,14 +28,13 @@ function Pagination(props) {
         </li>
       );
     }
-    return <ul className={styles.listStyle}>{list}</ul>;
+    return <ul>{list}</ul>;
   };
 
-  let pagesList = null;
-  if (currentPage >= 1 && currentPage < numberOfPages) {
-    pagesList = createList(1, numberOfPages, currentPage);
-  } else {
-    pagesList = (
+  const pagesList =
+    currentPage >= 1 && currentPage < numberOfPages ? (
+      createList(1, numberOfPages, currentPage)
+    ) : (
       <>
         {leftBorderPageButton > 2 && (
           <>
@@ -50,7 +50,7 @@ function Pagination(props) {
         {createList(leftBorderPageButton, rightBorderPageButton, currentPage)}
       </>
     );
-  }
+
   return (
     <div className={styles.wrapper}>
       <button
@@ -73,6 +73,16 @@ function Pagination(props) {
 }
 
 Pagination.propTypes = {
-  prop: PropTypes,
+  numberOfPages: PropTypes.number.isRequired,
+  currentPage: PropTypes.number.isRequired,
+  next: PropTypes.func,
+  prev: PropTypes.func,
+  setPage: PropTypes.func.isRequired,
 };
+
+Pagination.defaultProps = {
+  numberOfPages: 5,
+  currentPage: 1,
+};
+
 export default Pagination;

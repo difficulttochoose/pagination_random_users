@@ -22,6 +22,8 @@ function UserCard(props) {
   );
 }
 
-UserCard.propTypes = {};
+UserCard.propTypes = {
+  user: PropTypes.object.isRequired,
+};
 
 export default UserCard;
