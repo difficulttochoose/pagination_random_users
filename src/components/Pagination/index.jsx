@@ -10,11 +10,14 @@ function Pagination(props) {
 
   const currentPosition = Math.ceil(numberOfPages / 2);
   const leftBorderPageButton = 1 + (currentPage - currentPosition);
-  const rightBorderPageButton = numberOfPages + (currentPage - currentPosition);
 
-  const createList = (firstIndex, lastIndex, currentPage) => {
+  const createList = (numberOfPages, firstIndex, currentPage) => {
     let list = [];
-    for (let page = firstIndex; page <= lastIndex; ++page) {
+    const pages = Array.from(
+      { length: numberOfPages },
+      (page, pageNum) => pageNum + firstIndex
+    );
+    pages.map((page) =>
       list.push(
         <li key={page} className={styles.listItem}>
           <button
@@ -26,14 +29,14 @@ function Pagination(props) {
             {page}
           </button>
         </li>
-      );
-    }
+      )
+    );
     return <ul>{list}</ul>;
   };
 
   const pagesList =
     currentPage >= 1 && currentPage < numberOfPages ? (
-      createList(1, numberOfPages, currentPage)
+      createList(numberOfPages, 1, currentPage)
     ) : (
       <>
         {leftBorderPageButton > 2 && (
@@ -47,7 +50,7 @@ function Pagination(props) {
             <Icon path={mdiDotsHorizontal} className={styles.ellipsisStyle} />
           </>
         )}
-        {createList(leftBorderPageButton, rightBorderPageButton, currentPage)}
+        {createList(numberOfPages, leftBorderPageButton, currentPage)}
       </>
     );
 
