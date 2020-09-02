@@ -15,10 +15,10 @@ $size: 130px;
   border: 2px solid transparent;
   margin: 20px;
   @extend %flexContainer;
-}
-.userListItem:hover {
-  background-color: rgb(217, 255, 161);
-  border: 2px solid rgb(153, 255, 0);
+  &:hover {
+    background-color: rgb(217, 255, 161);
+    border: 2px solid rgb(153, 255, 0);
+  }
 }
 .imageWrapper {
   border-radius: 50%;
@@ -30,15 +30,15 @@ $size: 130px;
   & > * {
     display: block;
   }
-}
-.imageWrapper:hover {
-  box-shadow: 0px 0px 25px 14px rgb(255, 255, 255);
+  &:hover {
+    box-shadow: 0px 0px 25px 14px rgb(255, 255, 255);
+  }
 }
 .link {
   text-decoration: none;
   color: #00a249;
-}
-.link:hover {
-  color: rgb(166, 255, 0);
-  text-shadow: 1px 1px 2px black, 0 0 1em rgb(255, 251, 0);
+  &:hover {
+    color: rgb(166, 255, 0);
+    text-shadow: 1px 1px 2px black, 0 0 1em rgb(255, 251, 0);
+  }
 }

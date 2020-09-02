@@ -20,25 +20,25 @@ $buttonActiveColor: rgb(209, 209, 209);
   color: $buttonPrimaryColor;
   cursor: pointer;
   background-color: #efefefb8;
-}
-.listItemButton:focus,
-.listItemButton:active {
-  outline: none !important;
-}
-.listItemButton:active {
-  background-color: $buttonActiveColor;
-}
-.listItemButton:hover {
-  border-color: $buttonSecondaryColor;
-}
-.listItemButton:disabled {
-  color: $buttonSecondaryColor;
-  background-color: rgba(239, 239, 239, 0.3) !important;
-  cursor: unset;
-}
-.listItemButton:disabled:hover {
-  border-color: transparent;
-  cursor: unset;
+  &:focus,
+  &:active {
+    outline: none !important;
+  }
+  &:active {
+    background-color: $buttonActiveColor;
+  }
+  &:hover {
+    border-color: $buttonSecondaryColor;
+  }
+  &:disabled {
+    color: $buttonSecondaryColor;
+    background-color: rgba(239, 239, 239, 0.3) !important;
+    cursor: unset;
+  }
+  &:disabled:hover {
+    border-color: transparent;
+    cursor: unset;
+  }
 }
 .wrapper {
   justify-content: center;
@@ -48,12 +48,12 @@ $buttonActiveColor: rgb(209, 209, 209);
 .currentPage {
   color: $currentPrimaryColor;
   background: $currentSecondaryColor;
-}
-.currentPage:hover {
-  border-color: $currentPrimaryColor;
-}
-.currentPage:active {
-  background-color: $currentActiveColor;
+  &:hover {
+    border-color: $currentPrimaryColor;
+  }
+  &:active {
+    background-color: $currentActiveColor;
+  }
 }
 .ellipsisStyle {
   width: 50px;

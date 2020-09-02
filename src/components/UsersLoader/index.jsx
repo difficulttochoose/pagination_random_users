@@ -53,7 +53,6 @@ class UsersLoader extends Component {
     }
 
     if (isFetching) {
-      // return <div>Loading...</div>;
       return <div className={spinnerStyle.loader}>Loading...</div>;
     }
 
